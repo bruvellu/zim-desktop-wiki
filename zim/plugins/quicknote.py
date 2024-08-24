@@ -364,11 +364,18 @@ class QuickNoteDialog(Dialog):
 			# Automatically generate a (valid) page name
 			self._updating_title = True
 			start, end = buffer.get_bounds()
-			title = start.get_text(end).strip()[:50]
-				# Cut off at 50 characters to prevent using a whole paragraph
-			title = title.replace(':', '')
-			if '\n' in title:
-				title, _ = title.split('\n', 1)
+			text = start.get_text(end).strip()
+			# Try getting heading 1 as the page name
+			h1_pattern = r'======\s*(.*?)\s*======\n'
+			h1_match = re.search(h1_pattern, text)
+			if h1_match:
+				# Use heading as page name
+				title = h1_match.group(1)
+			else:
+				# Use first line as page name
+				title = text.split('\n')[0]
+			# Remove colons and limit to 50 characters
+			title = title.replace(':', '')[:50]
 			try:
 				title = Path.makeValidPageName(title)
 				self.form['basename'] = title
