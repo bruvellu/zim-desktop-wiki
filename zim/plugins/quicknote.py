@@ -365,15 +365,13 @@ class QuickNoteDialog(Dialog):
 			self._updating_title = True
 			start, end = buffer.get_bounds()
 			text = start.get_text(end).strip()
-			# Try getting heading 1 as the page name
-			h1_pattern = r'======\s*(.*?)\s*======\n'
-			h1_match = re.search(h1_pattern, text)
+			# Limit page name to contents of first line
+			title = text.split('\n')[0]
+			# Get heading 1 as the page name, if present
+			h1_pattern = r'======\s*(.*?)\s*======'
+			h1_match = re.search(h1_pattern, title)
 			if h1_match:
-				# Use heading as page name
 				title = h1_match.group(1)
-			else:
-				# Use first line as page name
-				title = text.split('\n')[0]
 			# Remove colons and limit to 50 characters
 			title = title.replace(':', '')[:50]
 			try:
