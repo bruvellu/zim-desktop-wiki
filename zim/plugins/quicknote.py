@@ -370,7 +370,7 @@ class QuickNoteDialog(Dialog):
 			if '\n' in title:
 				title, _ = title.split('\n', 1)
 			try:
-				title = Path.makeValidPageName(title.replace(':', ''))
+				title = Path.makeValidPageName(title)
 				self.form['basename'] = title
 			except ValueError:
 				pass
