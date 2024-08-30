@@ -282,7 +282,7 @@ class QuickNoteDialog(Dialog):
 		buffer = self.textview.get_buffer()
 		buffer.set_text(''.join(lines))
 		begin, end = buffer.get_bounds()
-		buffer.place_cursor(begin)
+		buffer.place_cursor(end)
 
 		buffer.set_modified(False)
 
