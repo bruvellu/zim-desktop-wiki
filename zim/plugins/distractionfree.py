@@ -102,6 +102,7 @@ class DistractionFreeMainWindowExtension(MainWindowExtension):
 			self.insert_maxwidth()
 			for widget in self._pathbar_widgets():
 				widget.hide()
+				widget.set_no_show_all(True)
 			self._css_provider = self._new_css_provider()
 			Gtk.StyleContext.add_provider_for_screen(screen, self._css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 		else:
@@ -109,6 +110,7 @@ class DistractionFreeMainWindowExtension(MainWindowExtension):
 			self.remove_maxwidth()
 			window.toggle_panes(self._show_panes)
 			for widget in self._pathbar_widgets():
+				widget.set_no_show_all(False)
 				widget.show()
 			window.pageview.grab_focus()
 

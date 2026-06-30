@@ -2699,6 +2699,9 @@ class Window(Gtk.Window):
 			raise ValueError('Widget not found in this window')
 
 	def init_uistate(self):
+		if self._uistate_initialized:
+			return
+
 		self.uistate.define((
 			('toggle_panes', ConfigDefinitionPaneToggle()),
 		))

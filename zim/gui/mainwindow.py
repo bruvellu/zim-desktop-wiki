@@ -713,6 +713,9 @@ class MainWindow(WindowBaseMixin, Window):
 			self.menubar.set_no_show_all(True)
 
 	def init_uistate(self):
+		if self._uistate_initialized:
+			return
+
 		# Initialize all the uistate parameters
 		# delayed till show or show_all because all this needs real
 		# uistate to be in place and plugins to be loaded
